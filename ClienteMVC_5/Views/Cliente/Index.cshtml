@@ -6,144 +6,154 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-@using (Html.BeginForm("GetClientePorNome", "Cliente", FormMethod.Get))
-{
-    @Html.Label("Nome", "Nome")
-    <input type="text" name="nome" placeholder="procurar" />
-    <input type="submit" name="submit" value="Procurar" />
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css"/>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th>
-            @Html.DisplayNameForModel()
-        </th>
-        <th></th>
-    </tr>
+</head>
+<body>
+    <h2>Clientes</h2>
 
-    @foreach (var item in Model)
+    @using (Html.BeginForm("GetClientePorNome", "Cliente", FormMethod.Get, new { @class = "form-inline" }))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.CEP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Logradouro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Complemento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bairro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Uf)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Excluir", "Delete", new { id = item.Id },
-               new { onclick = "return confirm('Deseja realmente deletar este usuário ?');" })
-            </td>
-        </tr>
+        <div class="form-group">
+            @Html.Label("Nome", "Nome", new { @class = "mr-2" })
+            <input type="text" name="nome" class="form-control" placeholder="Procurar" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Procurar</button>
     }
 
-</table>
 
-<div>
-    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-    de @Model.PageCount
-    @if (Model.HasPreviousPage)
-    {
-        @Html.ActionLink("<", "Index", new { pagina = 1 })
-        @Html.Raw(" ");
-        @Html.ActionLink("[ Anterior", "Index", new { pagina = Model.PageNumber - 1 })
-    }
-    else
-    {
-        @:<
-        @Html.Raw(" ");
-        @:< Anterior
-    }
-    @if (Model.HasNextPage)
-    {
-        @Html.ActionLink("Próxima ]", "Index", new { pagina = Model.PageNumber + 1 })
-        @Html.Raw(" ");
-        @Html.ActionLink(">", "Index", new { pagina = Model.PageCount })
-    }
-    else
-    {
-        @:Próxima >
-        @Html.Raw(" ")
-        @:>
-    }
-</div>
+    <br />
+    <p>
+        @Html.ActionLink("Adicionar cliente", "Create", null, new { @class = "btn btn-success" })
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    Nome
+                    @Html.DisplayNameForModel()
+                </th>
+                <th>
+                    CPF
+                    @Html.DisplayNameForModel()
+                </th>
+                <th>
+                    Data de nascimento
+                    @Html.DisplayNameForModel()
+                </th>
+                <th>
+                    CEP
+                    @Html.DisplayNameForModel()
+                </th>
+                <th>
+                    Logradouro
+                    @Html.DisplayNameForModel()
+                </th>
+                <th>
+                    Número
+                    @Html.DisplayNameForModel()
+                </th>
+
+                <th>
+                    Bairro
+                    @Html.DisplayNameForModel()
+                </th>
+                <th>
+                    Cidade
+                    @Html.DisplayNameForModel()
+                </th>
+                <th>
+                    UF
+                    @Html.DisplayNameForModel()
+                </th>
+                <th>Ações</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cpf)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataNascimento)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CEP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Logradouro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Numero)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bairro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Uf)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm mb-3" })
+                        <br />
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm mb-3" })
+                        <br />
+                        @Html.ActionLink("Excluir", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm mb-3", onclick = "return confirm('Deseja realmente deletar este usuário ?');" })
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+
+    <div class="pagination justify-content-center mt-4">
+        @if (Model.HasPreviousPage)
+        {
+            <a class="btn btn-secondary custom-pagination"  href="@Url.Action("Index", new { pagina = 1 })">&laquo; Primeira</a>
+            <a class="btn btn-secondary custom-pagination" href="@Url.Action("Index", new { pagina = Model.PageNumber - 1 })">Anterior</a>
+        }
+        else
+        {
+            <span class="btn btn-secondary disabled custom-pagination">&laquo; Primeira</span>
+            <span class="btn btn-secondary disabled custom-pagination">Anterior</span>
+        }
+
+        <span class="btn btn-secondary active custom-pagination">@Model.PageNumber</span>
+
+        @if (Model.HasNextPage)
+        {
+            <a class="btn btn-secondary custom-pagination" href="@Url.Action("Index", new { pagina = Model.PageNumber + 1 })">Próxima</a>
+            <a class="btn btn-secondary custom-pagination" href="@Url.Action("Index", new { pagina = Model.PageCount })">Última &raquo;</a>
+        }
+        else
+        {
+            <span class="btn btn-secondary disabled">Próxima</span>
+            <span class="btn btn-secondary disabled">Última &raquo;</span>
+        }
+    </div>
+</body>
+</html>
+
+
 

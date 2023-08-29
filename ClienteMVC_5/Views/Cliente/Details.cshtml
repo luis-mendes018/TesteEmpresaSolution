@@ -4,10 +4,16 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Mais informações sobre o cliente</h2>
 
+<style>
+    .dt{
+
+        margin-top: 30px;
+    }
+</style>
 <div>
-    <h4>ClienteViewModel</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,7 +23,7 @@
         <dd>
             @Html.DisplayFor(model => model.Nome)
         </dd>
-
+        
         <dt>
             @Html.DisplayNameFor(model => model.Rg)
         </dt>
@@ -141,6 +147,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-info btn-sm mb-3" }) 
+    <a href="@Url.Action("Index")" class="btn btn-danger btn-sm mb-3">Voltar</a>
 </p>

@@ -18,3 +18,25 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* Estilos para a tabela */
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+table.table th, table.table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.custom-pagination {
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-right: 5px;
+}

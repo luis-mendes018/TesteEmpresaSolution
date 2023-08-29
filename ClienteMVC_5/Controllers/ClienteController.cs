@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+
 using ClienteMVC_5.Models;
 using Newtonsoft.Json;
 using PagedList;
@@ -61,7 +62,7 @@ namespace ClienteMVC_5.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(ClienteViewModel cliente)
         {
-            
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44394/api/");
@@ -125,12 +126,12 @@ namespace ClienteMVC_5.Controllers
 
                     clientes = JsonConvert.DeserializeObject<ClienteViewModel>(data, settings);
 
-                    
+
                     return View(clientes);
                 }
             }
 
-            
+
             return View("Error");
         }
 
@@ -150,7 +151,7 @@ namespace ClienteMVC_5.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
-                        
+
                         return RedirectToAction("Index");
                     }
                     else
@@ -181,13 +182,24 @@ namespace ClienteMVC_5.Controllers
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<ClienteViewModel>();
+                    var readTask = result.Content.ReadAsStringAsync();
                     readTask.Wait();
-                    cliente = readTask.Result;
+
+                    var data = readTask.Result;
+                    var settings = new JsonSerializerSettings
+                    {
+                        DateFormatString = "dd/MM/yyyy"
+                    };
+
+                    cliente = JsonConvert.DeserializeObject<ClienteViewModel>(data, settings);
+
+                    return View(cliente);
                 }
             }
-            return View(cliente);
+
+            return View("Error");
         }
+
 
         public ActionResult Delete(int? id)
         {
@@ -211,12 +223,12 @@ namespace ClienteMVC_5.Controllers
                 }
             }
 
-            
+
             return View("Error");
         }
 
 
-        public ActionResult GetClientePorNome(string nome)
+        public ActionResult GetClientePorNome(string nome, int? pagina)
         {
             if (string.IsNullOrEmpty(nome))
             {
@@ -228,7 +240,6 @@ namespace ClienteMVC_5.Controllers
                 client.BaseAddress = new Uri("https://localhost:44394/api/clientes");
 
                 var responseTask = client.GetAsync($"clientes/Search/{nome}");
-
                 responseTask.Wait();
                 var result = responseTask.Result;
 
@@ -243,7 +254,11 @@ namespace ClienteMVC_5.Controllers
 
                     var clientes = JsonConvert.DeserializeObject<List<ClienteViewModel>>(data, settings);
 
-                    return View("Index", clientes);
+                    int numeroItensPorPagina = 4;
+                    int numeroPagina = pagina ?? 1;
+                    var clientesPagedList = new StaticPagedList<ClienteViewModel>(clientes, numeroPagina, numeroItensPorPagina, clientes.Count);
+
+                    return View("Index", clientesPagedList);
                 }
             }
 

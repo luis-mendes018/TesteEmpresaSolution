@@ -12,6 +12,7 @@ namespace ClienteMVC_5.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [Display(Name = "RG")]
         public string Rg { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório!")]
@@ -30,6 +31,7 @@ namespace ClienteMVC_5.Models
         public string OrgaoExpedicao { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [Display(Name = "UF")]
         public string UfCli { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório!")]
@@ -42,7 +44,7 @@ namespace ClienteMVC_5.Models
         public string Sexo { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório!")]
-
+        [Display(Name = "Estado civil")]
         public string EstadoCivil { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório!")]
@@ -53,6 +55,7 @@ namespace ClienteMVC_5.Models
         public string Logradouro { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [Display(Name = "Número")]
         public int Numero { get; set; }
 
         public string Complemento { get; set; }
@@ -64,6 +67,8 @@ namespace ClienteMVC_5.Models
         public string Cidade { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório!")]
+        [Display(Name = "UF")]
         public string Uf { get; set; }
+
     }
 }

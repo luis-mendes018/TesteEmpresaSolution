@@ -1,4 +1,4 @@
-﻿@model ClienteMVC_5.Models.ClienteViewModel
+﻿﻿@model ClienteMVC_5.Models.ClienteViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -114,10 +114,11 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DataExpecicao, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DataExpecicao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextBoxFor(model => model.DataExpecicao, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
             @Html.ValidationMessageFor(model => model.DataExpecicao, "", new { @class = "text-danger" })
         </div>
     </div>
+
     <br />
     <div class="form-group">
         @Html.LabelFor(model => model.OrgaoExpedicao, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -139,28 +140,39 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextBoxFor(model => model.DataNascimento, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
             @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <br />
-    <div class="form-group">
-        @Html.LabelFor(model => model.Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Sexo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
     <br />
     <div class="form-group">
-        @Html.LabelFor(model => model.EstadoCivil, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2" for="sexo">Sexo</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.EstadoCivil, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EstadoCivil, "", new { @class = "text-danger" })
+            <select class="form-control" id="sexo" name="sexo">
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+            </select>
         </div>
     </div>
+
+
+    <br />
+    <div class="form-group">
+        <label class="control-label col-md-2" for="estadoCivil">Estado Civil</label>
+        <div class="col-md-10">
+            <select class="form-control" id="estadoCivil" name="estadoCivil">
+                <option value="Solteiro(a)">Solteiro(a)</option>
+                <option value="Namorando">Namorando</option>
+                <option value="Casado(a)">Casado(a)</option>
+                <option value="Divorciado(a)">Divorciado(a)</option>
+                <option value="Viúvo(a)">Viúvo(a)</option>
+            </select>
+        </div>
+    </div>
+
+
 
     <br />
     <div class="form-group">
@@ -226,12 +238,12 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Criar" class="btn btn-success" />
         </div>
     </div>
 </div>
 }
-
+<br />
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index")" class="btn btn-danger btn-sm mb-3">Voltar</a>
 </div>
